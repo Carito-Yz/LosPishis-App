@@ -1,20 +1,38 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import CategoriesScreen from './src/screens/CategoriesScreen.jsx';
+import Header from './src/components/Header.jsx';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+import { useEffect } from 'react';
+
+SplashScreen.preventAutoHideAsync()
 
 export default function App() {
+
+  const [loaded, error] = useFonts({
+    'Product-Sans-Regular': require('./assets/fonts/ProductSansRegular.ttf'),
+    'Product-Sans-Bold': require('./assets/fonts/ProductSansBold.ttf'),
+    'Product-Sans-Italic': require('./assets/fonts/ProductSansItalic.ttf'),
+    'Product-Sans-Bold-Italic': require('./assets/fonts/ProductSansBoldItalic.ttf'),
+    'Juice-ITC-Regular': require('./assets/fonts/Juice-ITC-Regular.ttf')
+  });
+
+  useEffect(() => {
+    if (loaded || error) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded, error]);
+
+  if (!loaded && !error) {
+    return null;
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <View>
+      <Header />
+      <CategoriesScreen />
       <StatusBar style="auto" />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
