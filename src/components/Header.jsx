@@ -15,26 +15,27 @@ const Header = () => {
 export default Header
 
 const styles = StyleSheet.create({
-    container:{
-        height: 140,
-        backgroundColor: colors.white,
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-around",
-    },
-    titleContainer:{
-      justifyContent: "center"
-    },
-    title:{
-        fontSize: 35,
-        fontFamily: "Juice-ITC-Regular"
-    },
-    menu:{
-      width: '20%',
-    },
-    cart:{
-      width: '20%',
-      flexDirection: "row",
-      justifyContent: "flex-end"
-    }
+  container: {
+    height: "10%",
+    backgroundColor: colors.white,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
+    paddingTop: 30
+  },
+  titleContainer: {
+    justifyContent: "center"
+  },
+  title: {
+    fontSize: 35,
+    fontFamily: "Juice-ITC-Regular"
+  },
+  menu: {
+    width: '20%',
+  },
+  cart: {
+    width: '20%',
+    flexDirection: "row",
+    justifyContent: "flex-end"
+  }
 })

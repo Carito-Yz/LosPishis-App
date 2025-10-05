@@ -1,9 +1,9 @@
-import { StyleSheet, Text, View} from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 
-const FlatCard = ({children}) => {
+const FlatCard = ({ children, color }) => {
   return (
-    <View style={styles.container}>
-        {children}
+    <View style={[styles.container, { backgroundColor: color }]}>
+      {children}
     </View>
   )
 }
@@ -11,13 +11,13 @@ const FlatCard = ({children}) => {
 export default FlatCard
 
 const styles = StyleSheet.create({
-    container:{
-        backgroundColor:"#fce0e0ff",
-        padding: 16,
-        margin: 16,
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-        elevation: 10
-    }
+  container: {
+    margin: 16,
+    flexDirection: "row",
+    justifyContent: "start",
+    alignItems: "center",
+    elevation: 10,
+    height: 130,
+    borderRadius: 25
+  }
 })

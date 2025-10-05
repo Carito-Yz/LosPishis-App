@@ -1,37 +1,44 @@
 [
     {
         "id": 1,
-        "title": "Gadgets",
-        "image": ""
+        "title": "Ropa",
+        "image": "",
+        "subCategories": ["Todo", "Remeras", "Zapatos", "Pilotos"]
     },
     {
         "id": 2,
-        "title": "Consolas",
-        "image": ""
+        "title": "Paseo",
+        "image": "",
+        "subCategories": ["Todo", "Correas y Pretales", "Mochilas", "Transportadores", "Fundas para Auto"]
     },
     {
         "id": 3,
-        "title": "Comics",
-        "image": ""
+        "title": "Accesorios",
+        "image": "",
+        "subCategories": ["Todo", "Chapitas Identificadoras", "Moños y Corbatas", "Especial Navidad", "Juguetes", "Rascadores"]
     },
     {
         "id": 4,
-        "title": "Coleccionables",
-        "image": ""
+        "title": "Higiene",
+        "image": "",
+        "subCategories": ["Todo", "Shampoo y Crema Enjuague", "Pasta dental", "Cepillo de dientes", "Peines y Cepillos", "Piedras", "Bandeja Sanitaria", "Perfumes"]
     },
     {
         "id": 5,
-        "title": "hardware",
-        "image": ""
+        "title": "Farmacia",
+        "image": "",
+        "subCategories": ["Todo", "Gotas", "Pipetas", "Pastillas Antiparasitarias", "Pomadas"]
     },
     {
         "id": 6,
-        "title": "Ropa",
-        "image": ""
+        "title": "Alimento",
+        "image": "",
+        "subCategories": ["Todo", "Secos", "Húmedos", "Snacks"]
     },
     {
         "id": 7,
-        "title": "Eventos",
-        "image": ""
+        "title": "Camas",
+        "image": "",
+        "subCategories": ["Todo", "Acolchados", "Colchones", "Camas Cerradas", "Camas Abiertas"]
     }
 ]
