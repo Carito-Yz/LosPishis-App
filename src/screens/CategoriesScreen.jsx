@@ -5,17 +5,25 @@ import { colorsCategories, colors, subColorsCategories } from '../theme/colors'
 import { useState } from 'react'
 import AntDesign from '@expo/vector-icons/AntDesign';
 
-const CategoriesScreen = () => {
+const CategoriesScreen = ({ setCategorySelected, setSubCategorySelected }) => {
 
-  const [categorySelected, setCategorySelected] = useState(null)
+  const [categorySelectedToggle, setCategorySelectedToggle] = useState(null)
 
-  const handleCategorySelected = (selectedCategory) => {
-    setCategorySelected(prev => prev === selectedCategory ? null : selectedCategory)
+
+  const handleCategorySelectedToggle = (selectedCategory) => {
+    setCategorySelectedToggle(prev => prev === selectedCategory ? null : selectedCategory)
+  }
+
+  const handleOnPressSubCategory = (category, subCategory) => {
+    getSubCategory({
+      category: category,
+      subCategory: subCategory
+    })
   }
 
   const RenderCategoryItem = ({ item, index }) => (
     <>
-      <Pressable onPress={() => handleCategorySelected(item.id)}>
+      <Pressable onPress={() => handleCategorySelectedToggle(item.id)}>
         <FlatCard color={colorsCategories[index % colorsCategories.length]}>
           <Text style={styles.title}>{item.title}</Text>
 
@@ -32,12 +40,12 @@ const CategoriesScreen = () => {
         </FlatCard>
       </Pressable>
 
-      {categorySelected === item.id && (
+      {categorySelectedToggle === item.id && (
         <View style={styles.subCategoryContainer}>
           <View style={styles.subCategorySubContainer}>
-            {item.subCategories.map((item, index) => (
-              <Pressable style={styles.subCategory} key={index = Math.random()}>
-                <Text style={styles.subCategoryTitle}>{item}</Text>
+            {item.subCategories.map((subCategory, index) => (
+              <Pressable onPress={() => (setCategorySelected(item.title), setSubCategorySelected(subCategory))} style={styles.subCategory} key={index}>
+                <Text style={styles.subCategoryTitle}>{subCategory}</Text>
                 <AntDesign style={styles.subCategoryIcon} name="right" size={20} color="black" />
               </Pressable>
             ))}
