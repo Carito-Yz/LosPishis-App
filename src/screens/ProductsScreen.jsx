@@ -2,23 +2,29 @@ import { StyleSheet, Text, View, FlatList } from 'react-native'
 import products from "../data/products.json"
 import FlatCard from '../components/FlatCard'
 import { useEffect, useState } from 'react'
+import Search from "../components/Search"
 
 const ProductsScreen = ({ category, subCategory }) => {
 
     const [filteredProducts, setFilteredProducts] = useState([])
+    const [filterKeyWord, setFilterKeyWord] = useState("")
 
     useEffect(() => {
-        const filteredByCategory = products.filter(item => item.category.toLowerCase() === category.toLowerCase())
+        let filteredByCategory = products.filter(item => item.category.toLowerCase() === category.toLowerCase())
 
-        if (subCategory.toLowerCase() === "todo") {
-            setFilteredProducts(filteredByCategory)
+        if (subCategory.toLowerCase() !== "todo") {
+            filteredByCategory = filteredByCategory.filter(item => item.subCategory.toLowerCase() === subCategory.toLowerCase())
         }
-        else {
-            const filteredBySubCategory = filteredByCategory.filter(item => item.subCategory.toLowerCase() === subCategory.toLowerCase())
 
-            setFilteredProducts(filteredBySubCategory)
+        if (filterKeyWord) {
+            filteredByCategory = filteredByCategory.filter(item =>
+                item.name.toLowerCase().includes(filterKeyWord.toLowerCase())
+            )
         }
-    }, [category, subCategory])
+
+        setFilteredProducts(filteredByCategory)
+    }, [filterKeyWord])
+
 
     const renderProductItem = ({ item }) => (
         < FlatCard >
@@ -27,11 +33,14 @@ const ProductsScreen = ({ category, subCategory }) => {
     )
 
     return (
-        <FlatList
-            data={filteredProducts}
-            renderItem={renderProductItem}
-            keyExtractor={item => item.id}>
-        </FlatList>
+        <>
+            <Search setFilterKeyWord={setFilterKeyWord} keyWord={filterKeyWord} />
+            <FlatList
+                data={filteredProducts}
+                renderItem={renderProductItem}
+                keyExtractor={item => item.id}>
+            </FlatList>
+        </>
     )
 }
 
