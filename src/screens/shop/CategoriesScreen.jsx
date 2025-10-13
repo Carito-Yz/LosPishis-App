@@ -1,17 +1,29 @@
 import { StyleSheet, Text, View, FlatList, Image, Pressable } from 'react-native'
-import categories from "../../data/categories.json"
 import FlatCard from '../../components/FlatCard'
 import { colorsCategories, colors, subColorsCategories } from '../../theme/colors'
 import { useState } from 'react'
 import Feather from '@expo/vector-icons/Feather';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectCategory, selectSubCategory, filterProductsByCategory, filterProductsBySubCategory } from "../../store/slices/shopSlice.js"
 
 const CategoriesScreen = ({ navigation }) => {
 
   const [categorySelectedToggle, setCategorySelectedToggle] = useState(null)
 
+  const categories = useSelector(state => state.shopReducer.categories)
+
+  const dispatch = useDispatch()
 
   const handleCategorySelectedToggle = (selectedCategory) => {
     setCategorySelectedToggle(prev => prev === selectedCategory ? null : selectedCategory)
+  }
+
+  const handleSelectSubCategory = (category, subCategory) => {
+    dispatch(selectCategory(category))
+    dispatch(selectSubCategory(subCategory))
+    dispatch(filterProductsByCategory())
+    dispatch(filterProductsBySubCategory())
+    navigation.navigate("Productos")
   }
 
   const RenderCategoryItem = ({ item, index }) => (
@@ -37,7 +49,7 @@ const CategoriesScreen = ({ navigation }) => {
         <View style={styles.subCategoryContainer}>
           <View style={styles.subCategorySubContainer}>
             {item.subCategories.map((subCategory, index) => (
-              <Pressable onPress={() => (navigation.navigate("Productos", { category: item.title, subCategory: subCategory }))} style={styles.subCategory} key={index}>
+              <Pressable onPress={() => handleSelectSubCategory(item.title, subCategory)} style={styles.subCategory} key={index}>
                 <Text style={styles.subCategoryTitle}>{subCategory}</Text>
                 <Feather name="chevron-right" size={24} color="black" />
               </Pressable>
@@ -64,7 +76,7 @@ export default CategoriesScreen
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 20
+    marginBottom: 30
   },
   categories: {
     height: "90%",

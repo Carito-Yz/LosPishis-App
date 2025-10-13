@@ -1,35 +1,44 @@
 import { StyleSheet, Text, View, FlatList, Pressable } from 'react-native'
-import products from "../../data/products.json"
 import FlatCard from '../../components/FlatCard'
 import { useEffect, useState } from 'react'
 import Search from "../../components/Search"
+import { useSelector, useDispatch } from 'react-redux'
+import { selectProduct } from '../../store/slices/shopSlice'
 
-const ProductsScreen = ({ route, navigation }) => {
+const ProductsScreen = ({ navigation }) => {
+
+    const dispatch = useDispatch()
 
     const [filteredProducts, setFilteredProducts] = useState([])
     const [filterKeyWord, setFilterKeyWord] = useState("")
 
-    const { category, subCategory } = route.params
+    const subCategory = useSelector(state => state.shopReducer.subCategorySelected)
+    const productsByCategory = useSelector(state => state.shopReducer.productsFilteredByCategory);
+    const productsBySubCategory = useSelector(state => state.shopReducer.productsFilteredBySubCategory);
+
+    const productsToShow = subCategory.toLowerCase() === "todo"
+        ? productsByCategory
+        : productsBySubCategory;
+
 
     useEffect(() => {
-        let filteredByCategory = products.filter(item => item.category.toLowerCase() === category.toLowerCase())
-
-        if (subCategory.toLowerCase() !== "todo") {
-            filteredByCategory = filteredByCategory.filter(item => item.subCategory.toLowerCase() === subCategory.toLowerCase())
-        }
-
+        let productsFilteredByKeyWord = productsToShow;
         if (filterKeyWord) {
-            filteredByCategory = filteredByCategory.filter(item =>
+            productsFilteredByKeyWord = productsToShow.filter(item =>
                 item.name.toLowerCase().includes(filterKeyWord.toLowerCase())
-            )
+            );
         }
+        setFilteredProducts(productsFilteredByKeyWord);
+    }, [productsToShow, filterKeyWord]);
 
-        setFilteredProducts(filteredByCategory)
-    }, [filterKeyWord])
-
+    const handleSelectProduct = (item) => {
+        dispatch(selectProduct(item))
+        navigation.navigate("Producto")
+    }
 
     const renderProductItem = ({ item }) => (
-        <Pressable onPress={() => navigation.navigate("Producto")}>
+        <Pressable onPress={() => handleSelectProduct(item)}>
+            {console.log(productsToShow)}
             < FlatCard >
                 <Text style={styles.text}>{item.name}</Text>
             </FlatCard >

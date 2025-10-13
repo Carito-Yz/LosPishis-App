@@ -6,6 +6,8 @@ import { useEffect} from 'react';
 import { ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import BottomTabsNavigator from "./src/navigation/BottomTabsNavigator.jsx"
+import { store } from './src/store';
+import { Provider } from 'react-redux';
 
 export default function App() {
   const [loaded] = useFonts({
@@ -35,9 +37,12 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <BottomTabsNavigator />
-      <StatusBar style="auto" />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <BottomTabsNavigator />
+        <StatusBar style="auto" />
+      </NavigationContainer>
+    </Provider>
+    
   );
 }
