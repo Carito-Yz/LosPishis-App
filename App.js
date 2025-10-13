@@ -1,12 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import CategoriesScreen from './src/screens/CategoriesScreen.jsx';
-import Header from './src/components/Header.jsx';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect, useState } from 'react';
-import ProductsScreen from './src/screens/ProductsScreen.jsx';
+import { useEffect} from 'react';
 import { ActivityIndicator } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import BottomTabsNavigator from "./src/navigation/BottomTabsNavigator.jsx"
 
 export default function App() {
   const [loaded] = useFonts({
@@ -17,10 +16,6 @@ export default function App() {
     'Juice-ITC-Regular': require('./assets/fonts/Juice-ITC-Regular.ttf')
   });
 
-  const [categorySelected, setCategorySelected] = useState("")
-  const [subCategorySelected, setSubCategorySelected] = useState("")
-
-  // Splash screen
   useEffect(() => {
     const prepare = async () => {
       await SplashScreen.preventAutoHideAsync();
@@ -40,16 +35,9 @@ export default function App() {
   }
 
   return (
-    <>
-      <Header />
-        <>
-          {categorySelected === "" ? (
-            <CategoriesScreen setCategorySelected={setCategorySelected} setSubCategorySelected={setSubCategorySelected} />
-          ) : (
-            <ProductsScreen category={categorySelected} subCategory={subCategorySelected} />
-          )}
-        </>
+    <NavigationContainer>
+      <BottomTabsNavigator />
       <StatusBar style="auto" />
-    </>
+    </NavigationContainer>
   );
 }

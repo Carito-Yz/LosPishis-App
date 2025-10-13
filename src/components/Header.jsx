@@ -1,13 +1,26 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
-import AntDesign from '@expo/vector-icons/AntDesign';
+import Feather from '@expo/vector-icons/Feather';
 import { colors } from '../theme/colors';
 
-const Header = () => {
+const Header = ({ navigation, route, title }) => {
+
+  const RootScreens = ["Categorias", "Carrito"];
+
+  const isRootScreen = RootScreens.includes(route.name);
+
+  const handlePress = () => {
+    if (!isRootScreen && navigation.canGoBack()) {
+      navigation.goBack();
+    } else {
+      console.log("Abrir menú");
+    }
+  }
+
   return (
     <View style={styles.container}>
-      <Pressable style={styles.menu}><AntDesign name="menu" size={24} color="black" /></Pressable>
-      <View style={styles.titleContainer}><Text style={styles.title}>Los Pishis</Text></View>
-      <Pressable style={styles.cart}><AntDesign name="shopping-cart" size={24} color="black" /></Pressable>
+      <Pressable style={styles.menu} onPress={handlePress}><Feather name={isRootScreen ? "menu" : "arrow-left"} size={26} color="black" /></Pressable>
+      <View style={styles.titleContainer}><Text style={styles.title}>{title}</Text></View>
+      <Pressable style={styles.cart}><Feather name="user" size={26} color="black" /></Pressable>
     </View>
   )
 }
@@ -16,7 +29,7 @@ export default Header
 
 const styles = StyleSheet.create({
   container: {
-    height: "10%",
+    height: 100,
     backgroundColor: colors.white,
     flexDirection: "row",
     alignItems: "center",

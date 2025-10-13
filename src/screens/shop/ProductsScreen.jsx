@@ -1,13 +1,15 @@
-import { StyleSheet, Text, View, FlatList } from 'react-native'
-import products from "../data/products.json"
-import FlatCard from '../components/FlatCard'
+import { StyleSheet, Text, View, FlatList, Pressable } from 'react-native'
+import products from "../../data/products.json"
+import FlatCard from '../../components/FlatCard'
 import { useEffect, useState } from 'react'
-import Search from "../components/Search"
+import Search from "../../components/Search"
 
-const ProductsScreen = ({ category, subCategory }) => {
+const ProductsScreen = ({ route, navigation }) => {
 
     const [filteredProducts, setFilteredProducts] = useState([])
     const [filterKeyWord, setFilterKeyWord] = useState("")
+
+    const { category, subCategory } = route.params
 
     useEffect(() => {
         let filteredByCategory = products.filter(item => item.category.toLowerCase() === category.toLowerCase())
@@ -27,9 +29,11 @@ const ProductsScreen = ({ category, subCategory }) => {
 
 
     const renderProductItem = ({ item }) => (
-        < FlatCard >
-            <Text style={styles.text}>{item.name}</Text>
-        </FlatCard >
+        <Pressable onPress={() => navigation.navigate("Producto")}>
+            < FlatCard >
+                <Text style={styles.text}>{item.name}</Text>
+            </FlatCard >
+        </Pressable>
     )
 
     return (

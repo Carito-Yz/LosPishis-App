@@ -1,24 +1,17 @@
 import { StyleSheet, Text, View, FlatList, Image, Pressable } from 'react-native'
-import categories from "../data/categories.json"
-import FlatCard from '../components/FlatCard'
-import { colorsCategories, colors, subColorsCategories } from '../theme/colors'
+import categories from "../../data/categories.json"
+import FlatCard from '../../components/FlatCard'
+import { colorsCategories, colors, subColorsCategories } from '../../theme/colors'
 import { useState } from 'react'
-import AntDesign from '@expo/vector-icons/AntDesign';
+import Feather from '@expo/vector-icons/Feather';
 
-const CategoriesScreen = ({ setCategorySelected, setSubCategorySelected }) => {
+const CategoriesScreen = ({ navigation }) => {
 
   const [categorySelectedToggle, setCategorySelectedToggle] = useState(null)
 
 
   const handleCategorySelectedToggle = (selectedCategory) => {
     setCategorySelectedToggle(prev => prev === selectedCategory ? null : selectedCategory)
-  }
-
-  const handleOnPressSubCategory = (category, subCategory) => {
-    getSubCategory({
-      category: category,
-      subCategory: subCategory
-    })
   }
 
   const RenderCategoryItem = ({ item, index }) => (
@@ -44,9 +37,9 @@ const CategoriesScreen = ({ setCategorySelected, setSubCategorySelected }) => {
         <View style={styles.subCategoryContainer}>
           <View style={styles.subCategorySubContainer}>
             {item.subCategories.map((subCategory, index) => (
-              <Pressable onPress={() => (setCategorySelected(item.title), setSubCategorySelected(subCategory))} style={styles.subCategory} key={index}>
+              <Pressable onPress={() => (navigation.navigate("Productos", { category: item.title, subCategory: subCategory }))} style={styles.subCategory} key={index}>
                 <Text style={styles.subCategoryTitle}>{subCategory}</Text>
-                <AntDesign style={styles.subCategoryIcon} name="right" size={20} color="black" />
+                <Feather name="chevron-right" size={24} color="black" />
               </Pressable>
             ))}
           </View>
@@ -61,6 +54,7 @@ const CategoriesScreen = ({ setCategorySelected, setSubCategorySelected }) => {
         data={categories}
         renderItem={RenderCategoryItem}
         keyExtractor={item => item.id}
+        style={styles.container}
       />
     </View>
   )
@@ -69,8 +63,11 @@ const CategoriesScreen = ({ setCategorySelected, setSubCategorySelected }) => {
 export default CategoriesScreen
 
 const styles = StyleSheet.create({
+  container: {
+    marginBottom: 20
+  },
   categories: {
-    height: "90%"
+    height: "90%",
   },
   title: {
     color: colors.white,
@@ -116,8 +113,5 @@ const styles = StyleSheet.create({
   subCategoryTitle: {
     fontFamily: "Product-Sans-Italic",
     fontSize: 15
-  },
-  subCategoryIcon: {
-
   }
 })
