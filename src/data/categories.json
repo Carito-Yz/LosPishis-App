@@ -1,44 +1,78 @@
 [
-    {
-        "id": 1,
-        "title": "Ropa",
-        "image": "",
-        "subCategories": ["Todo", "Remeras", "Zapatos", "Pilotos"]
-    },
-    {
-        "id": 2,
-        "title": "Paseo",
-        "image": "",
-        "subCategories": ["Todo", "Correas y Pretales", "Mochilas", "Transportadores", "Fundas para Auto"]
-    },
-    {
-        "id": 3,
-        "title": "Accesorios",
-        "image": "",
-        "subCategories": ["Todo", "Chapitas Identificadoras", "Moños y Corbatas", "Especial Navidad", "Juguetes", "Rascadores"]
-    },
-    {
-        "id": 4,
-        "title": "Higiene",
-        "image": "",
-        "subCategories": ["Todo", "Shampoo y Crema Enjuague", "Pasta dental", "Cepillo de dientes", "Peines y Cepillos", "Piedras", "Bandeja Sanitaria", "Perfumes"]
-    },
-    {
-        "id": 5,
-        "title": "Farmacia",
-        "image": "",
-        "subCategories": ["Todo", "Gotas", "Pipetas", "Pastillas Antiparasitarias", "Pomadas"]
-    },
-    {
-        "id": 6,
-        "title": "Alimento",
-        "image": "",
-        "subCategories": ["Todo", "Secos", "Húmedos", "Snacks"]
-    },
-    {
-        "id": 7,
-        "title": "Camas",
-        "image": "",
-        "subCategories": ["Todo", "Acolchados", "Colchones", "Camas Cerradas", "Camas Abiertas"]
-    }
+  {
+    "id": 1,
+    "title": "Ropa",
+    "image": "",
+    "subCategories": ["Todo", "Remeras", "Zapatos", "Pilotos"]
+  },
+  {
+    "id": 2,
+    "title": "Paseo",
+    "image": "",
+    "subCategories": [
+      "Todo",
+      "Correas y Pretales",
+      "Mochilas",
+      "Transportadoras",
+      "Fundas para Auto"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Accesorios",
+    "image": "",
+    "subCategories": [
+      "Todo",
+      "Chapitas Identificadoras",
+      "Moños y Corbatas",
+      "Especial Navidad",
+      "Juguetes",
+      "Rascadores"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Higiene",
+    "image": "",
+    "subCategories": [
+      "Todo",
+      "Shampoo y Crema Enjuague",
+      "Pasta dental",
+      "Cepillo de dientes",
+      "Peines y Cepillos",
+      "Piedras",
+      "Bandeja Sanitaria",
+      "Perfumes"
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Farmacia",
+    "image": "",
+    "subCategories": [
+      "Todo",
+      "Gotas",
+      "Pipetas",
+      "Pastillas Antiparasitarias",
+      "Pomadas"
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Alimento",
+    "image": "",
+    "subCategories": ["Todo", "Secos", "Húmedos", "Snacks"]
+  },
+  {
+    "id": 7,
+    "title": "Camas",
+    "image": "",
+    "subCategories": [
+      "Todo",
+      "Acolchados",
+      "Colchones",
+      "Camas Cerradas",
+      "Camas Abiertas"
+    ]
+  }
 ]

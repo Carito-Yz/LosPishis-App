@@ -9,8 +9,6 @@ const shopSlice = createSlice({
         products,
         categorySelected: "",
         subCategorySelected: "",
-        productsFilteredByCategory: [],
-        productsFilteredBySubCategory: [],
         productSelected: {}
     },
     reducers:{
@@ -20,18 +18,12 @@ const shopSlice = createSlice({
         selectSubCategory: (state, action) => {
             state.subCategorySelected = action.payload
         },
-        filterProductsByCategory: (state) => {
-            state.productsFilteredByCategory = state.products.filter(product => product.category.toLowerCase() === state.categorySelected.toLowerCase())
-        },
-        filterProductsBySubCategory: (state) => {
-            state.productsFilteredBySubCategory = state.products.filter(product => product.subCategory.toLowerCase() === state.subCategorySelected.toLowerCase())
-        },
         selectProduct: (state, action) => {
             state.productSelected = action.payload
         }
     }
 })
 
-export const {selectCategory, selectSubCategory, filterProductsByCategory, filterProductsBySubCategory, selectProduct} = shopSlice.actions
+export const {selectCategory, selectSubCategory, selectProduct} = shopSlice.actions
 
 export default shopSlice.reducer

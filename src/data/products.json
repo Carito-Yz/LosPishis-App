@@ -1,13 +1,13 @@
 [
   {
     "id": 1,
-    "name": "Pack de ropa variada para perro",
-    "shortDescription": "Kit con varias prendas.",
-    "longDescription": "Pack que incluye remera, piloto y zapatitos para perro pequeño. Ideal para empezar su guardarropa.",
+    "name": "Remera Argentina para Perro",
+    "shortDescription": "Remera liviana de algodón con diseño de la selección argentina.",
+    "longDescription": "Remera cómoda y fresca para perro con los colores de la selección argentina. Ideal para paseos, sesiones de fotos o días de partido. Confeccionada en algodón suave para evitar irritaciones y permitir total libertad de movimiento.",
     "price": 12500,
     "stock": 8,
     "category": "Ropa",
-    "subCategory": "Todo",
+    "subCategory": "Remeras",
     "image": ""
   },
   {
@@ -111,13 +111,13 @@
   },
   {
     "id": 11,
-    "name": "Kit de paseo completo",
-    "shortDescription": "Incluye correa, pretal y bolso.",
-    "longDescription": "Set de paseo ideal para perros pequeños y medianos. Incluye correa de nylon reforzada, pretal acolchado y bolso portátil.",
+    "name": "Zapatos de Verano para Perro",
+    "shortDescription": "Zapatos livianos y transpirables para proteger sus patitas.",
+    "longDescription": "Zapatos de verano diseñados para perros, ideales para proteger las patas del calor, el asfalto y superficies ásperas. Fabricados con material transpirable y suela antideslizante para mayor comodidad y seguridad en cada paseo.",
     "price": 13500,
     "stock": 10,
     "category": "Paseo",
-    "subCategory": "Todo",
+    "subCategory": "Zapatos",
     "image": ""
   },
   {
@@ -271,7 +271,7 @@
     "price": 12000,
     "stock": 20,
     "category": "Paseo",
-    "subCategory": "Fundas para el Auto",
+    "subCategory": "Fundas para Auto",
     "image": ""
   },
   {
@@ -282,7 +282,7 @@
     "price": 16500,
     "stock": 10,
     "category": "Paseo",
-    "subCategory": "Fundas para el Auto",
+    "subCategory": "Fundas para Auto",
     "image": ""
   },
   {
@@ -293,7 +293,7 @@
     "price": 13900,
     "stock": 13,
     "category": "Paseo",
-    "subCategory": "Fundas para el Auto",
+    "subCategory": "Fundas para Auto",
     "image": ""
   },
   {
@@ -304,7 +304,7 @@
     "price": 18500,
     "stock": 9,
     "category": "Paseo",
-    "subCategory": "Fundas para el Auto",
+    "subCategory": "Fundas para Auto",
     "image": ""
   },
   {
@@ -2576,6 +2576,116 @@
     "stock": 7,
     "category": "Camas",
     "subCategory": "Camas Abiertas",
+    "image": ""
+  },
+  {
+    "id": 258,
+    "name": "Perfume floral para perros",
+    "shortDescription": "Aroma suave y delicado.",
+    "longDescription": "Colonia con esencia floral diseñada para perros sensibles, aporta un aroma limpio sin irritar la piel.",
+    "price": 6000,
+    "stock": 20,
+    "category": "Higiene",
+    "subCategory": "Perfumes",
+    "image": ""
+  },
+  {
+    "id": 259,
+    "name": "Colonia vainilla para gatos",
+    "shortDescription": "Dulce y agradable.",
+    "longDescription": "Perfume con notas de vainilla pensado para gatos, ideal para mantener el pelaje con un aroma cálido sin ser invasivo.",
+    "price": 6200,
+    "stock": 22,
+    "category": "Higiene",
+    "subCategory": "Perfumes",
+    "image": ""
+  },
+  {
+    "id": 260,
+    "name": "Perfume neutro para mascotas",
+    "shortDescription": "Sin fragancia artificial.",
+    "longDescription": "Spray desodorante sin perfume añadido, pensado para mascotas y tutores que prefieren un aroma limpio y natural.",
+    "price": 5500,
+    "stock": 30,
+    "category": "Higiene",
+    "subCategory": "Perfumes",
+    "image": ""
+  },
+  {
+    "id": 261,
+    "name": "Colonia herbal para perros",
+    "shortDescription": "Frescura natural.",
+    "longDescription": "Colonia con extractos herbales y propiedades refrescantes, ideal para perros activos que disfrutan del aire libre.",
+    "price": 6100,
+    "stock": 19,
+    "category": "Higiene",
+    "subCategory": "Perfumes",
+    "image": ""
+  },
+  {
+    "id": 262,
+    "name": "Spray perfumado de coco",
+    "shortDescription": "Toque tropical.",
+    "longDescription": "Perfume con aroma a coco suave, formulado para dejar el pelaje hidratado y perfumado sin dejar residuos.",
+    "price": 6300,
+    "stock": 16,
+    "category": "Higiene",
+    "subCategory": "Perfumes",
+    "image": ""
+  },
+  {
+    "id": 263,
+    "name": "Perfume de lavanda relajante",
+    "shortDescription": "Ideal para la calma.",
+    "longDescription": "Spray con esencia de lavanda que ayuda a relajar a perros y gatos durante el aseo o antes de dormir.",
+    "price": 6400,
+    "stock": 14,
+    "category": "Higiene",
+    "subCategory": "Perfumes",
+    "image": ""
+  },
+  {
+    "id": 264,
+    "name": "Colonia frutilla para perros",
+    "shortDescription": "Dulce y fresca.",
+    "longDescription": "Perfume con esencia de frutilla que deja un aroma divertido y juvenil en el pelaje del perro.",
+    "price": 5800,
+    "stock": 17,
+    "category": "Higiene",
+    "subCategory": "Perfumes",
+    "image": ""
+  },
+  {
+    "id": 265,
+    "name": "Perfume de talco para gatos",
+    "shortDescription": "Aroma clásico de bebé.",
+    "longDescription": "Colonia con fragancia a talco diseñada especialmente para gatos, deja sensación de limpieza por más tiempo.",
+    "price": 6500,
+    "stock": 12,
+    "category": "Higiene",
+    "subCategory": "Perfumes",
+    "image": ""
+  },
+  {
+    "id": 266,
+    "name": "Spray refrescante mentolado",
+    "shortDescription": "Sensación de frescura.",
+    "longDescription": "Perfume con notas mentoladas para mantener a la mascota fresca después del paseo o en días calurosos.",
+    "price": 6600,
+    "stock": 11,
+    "category": "Higiene",
+    "subCategory": "Perfumes",
+    "image": ""
+  },
+  {
+    "id": 267,
+    "name": "Colonia duradera premium",
+    "shortDescription": "Fragancia de larga duración.",
+    "longDescription": "Perfume premium con fórmula concentrada que prolonga la duración del aroma y neutraliza malos olores.",
+    "price": 6900,
+    "stock": 10,
+    "category": "Higiene",
+    "subCategory": "Perfumes",
     "image": ""
   }
 ]

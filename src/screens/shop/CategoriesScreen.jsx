@@ -3,14 +3,15 @@ import FlatCard from '../../components/FlatCard'
 import { colorsCategories, colors, subColorsCategories } from '../../theme/colors'
 import { useState } from 'react'
 import Feather from '@expo/vector-icons/Feather';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectCategory, selectSubCategory, filterProductsByCategory, filterProductsBySubCategory } from "../../store/slices/shopSlice.js"
+import { useDispatch } from 'react-redux';
+import { selectCategory, selectSubCategory } from "../../store/slices/shopSlice.js"
+import { useGetCategoriesQuery } from "../../store/services/shopApi.js"
 
 const CategoriesScreen = ({ navigation }) => {
 
   const [categorySelectedToggle, setCategorySelectedToggle] = useState(null)
 
-  const categories = useSelector(state => state.shopReducer.categories)
+  const { data: categories, isLoading, error } = useGetCategoriesQuery()
 
   const dispatch = useDispatch()
 
@@ -21,8 +22,6 @@ const CategoriesScreen = ({ navigation }) => {
   const handleSelectSubCategory = (category, subCategory) => {
     dispatch(selectCategory(category))
     dispatch(selectSubCategory(subCategory))
-    dispatch(filterProductsByCategory())
-    dispatch(filterProductsBySubCategory())
     navigation.navigate("Productos")
   }
 

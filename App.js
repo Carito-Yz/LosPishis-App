@@ -6,7 +6,7 @@ import { useEffect} from 'react';
 import { ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import BottomTabsNavigator from "./src/navigation/BottomTabsNavigator.jsx"
-import { store } from './src/store';
+import { PishisStore} from './src/store';
 import { Provider } from 'react-redux';
 
 export default function App() {
@@ -37,7 +37,7 @@ export default function App() {
   }
 
   return (
-    <Provider store={store}>
+    <Provider store={PishisStore}>
       <NavigationContainer>
         <BottomTabsNavigator />
         <StatusBar style="auto" />
