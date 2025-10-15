@@ -4,10 +4,10 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect} from 'react';
 import { ActivityIndicator } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
 import BottomTabsNavigator from "./src/navigation/BottomTabsNavigator.jsx"
 import { PishisStore} from './src/store';
 import { Provider } from 'react-redux';
+import MainNavigator from './src/navigation/MainNavigator.jsx';
 
 export default function App() {
   const [loaded] = useFonts({
@@ -38,11 +38,8 @@ export default function App() {
 
   return (
     <Provider store={PishisStore}>
-      <NavigationContainer>
-        <BottomTabsNavigator />
+        <MainNavigator />
         <StatusBar style="auto" />
-      </NavigationContainer>
     </Provider>
-    
   );
 }
