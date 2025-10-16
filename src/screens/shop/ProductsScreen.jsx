@@ -19,9 +19,13 @@ const ProductsScreen = ({ navigation }) => {
     const subCategory = useSelector(state => state.shopReducer.subCategorySelected)
 
 
-    const { data: productsByCategory, isLoading, error } = useGetProductsByCategoryQuery(category)
+    const { data: productsByCategory, isLoading } = useGetProductsByCategoryQuery(category)
 
     useEffect(() => {
+        if (!productsByCategory) {
+            setFilteredProducts([]);
+            return;
+        }
         let filtered = productsByCategory;
 
         if (subCategory.toLowerCase() !== "todo") {
@@ -47,6 +51,14 @@ const ProductsScreen = ({ navigation }) => {
             </FlatCard >
         </Pressable>
     )
+
+    if (isLoading) {
+        return (
+            <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+                <ActivityIndicator size="large" color="#0000ff" />
+            </View>
+        );
+    }
 
     return (
         <>

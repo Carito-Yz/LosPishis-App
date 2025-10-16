@@ -1,8 +1,9 @@
-import { StyleSheet, Text, View, TextInput, Pressable, Dimensions } from 'react-native'
+import { StyleSheet, Text, View, TextInput, Pressable, Dimensions, Switch } from 'react-native'
 import { useLogInMutation } from '../../store/services/AuthApi'
 import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { setUserEmail } from '../../store/slices/userSlice'
+import { setUserEmail, setLocalId } from '../../store/slices/userSlice'
+import { saveSession, clearSession } from '../../db'
 
 const textInputWidth = Dimensions.get('window').width * 0.7
 
@@ -10,19 +11,40 @@ const LoginScreen = ({ navigation }) => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [persistSession, setPersistSession] = useState(false)
 
     const [triggerLogin, result] = useLogInMutation()
 
-    const onSubmit = () => {
-        triggerLogin({ email, password })
-    }
+    const onSubmit = async () => {
+        try {
+            const result = await triggerLogin({ email, password }).unwrap();
+        } catch (err) {
+            console.log("Error login:", err);
+        }
+    };
 
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if (result.status === "fulfilled") {
-            dispatch(setUserEmail(email))
+        const saveLoginSession = async () => {
+            if (result.status === "fulfilled") {
+                try {
+
+                    const { localId, email } = result.data
+
+                    if (persistSession) {
+                        await saveSession(localId, email)
+                    } else {
+                        await clearSession(localId)
+                    }
+                    dispatch(setUserEmail(email))
+                    dispatch(setLocalId(localId))
+                } catch (error) {
+                    console.log("Error al guardar sesion:", error)
+                }
+            }
         }
+        saveLoginSession()
     }, [result])
 
     return (
@@ -54,6 +76,10 @@ const LoginScreen = ({ navigation }) => {
                         Crea una
                     </Text>
                 </Pressable>
+                <Switch
+                    onValueChange={() => setPersistSession(!persistSession)}
+                    value={persistSession}
+                    trackColor={{ false: '#767577', true: '#81b0ff' }} />
             </View>
 
             <Pressable style={styles.btn} onPress={onSubmit}><Text style={styles.btnText}>Iniciar sesión</Text></Pressable>

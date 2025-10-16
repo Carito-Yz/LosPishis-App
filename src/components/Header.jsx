@@ -5,28 +5,12 @@ import { useSelector } from 'react-redux';
 
 const Header = ({ navigation, route }) => {
 
-  const RootScreens = ["Categorias", "Carrito"];
-
-  const isRootScreen = RootScreens.includes(route.name);
-
-  const handlePress = () => {
-    if (!isRootScreen && navigation.canGoBack()) {
-      navigation.goBack();
-    } else {
-      console.log("Abrir menú");
-    }
-  }
-
   const categorySelected = useSelector(state => state.shopReducer.categorySelected);
   const subCategorySelected = useSelector(state => state.shopReducer.subCategorySelected);
 
   const getTitle = () => {
-    if (route.name === "Home") {
-      return <Text style={styles.title}>Los Pishis</Text>;
-    }
-
     if (route.name === "Categorias") {
-      return <Text style={styles.title}>Explorar</Text>;
+      return <Text style={styles.title}>Los Pishis</Text>;
     }
 
     if (route.name === "Productos") {
@@ -42,14 +26,39 @@ const Header = ({ navigation, route }) => {
       return <Text style={styles.title}>Detalle</Text>;
     }
 
+    if (route.name === "Carrito") {
+      return <Text style={styles.title}>Carrito</Text>;
+    }
+
+    if (route.name === "Perfil") {
+      return <Text style={styles.title}>Perfil</Text>;
+    }
+
     return null;
   };
 
+
+
   return (
     <View style={styles.container}>
-      <Pressable style={styles.menu} onPress={handlePress}><Feather name={isRootScreen ? "menu" : "arrow-left"} size={26} color="black" /></Pressable>
+      {
+        navigation.canGoBack()
+          ?
+          <Pressable style={styles.menu} onPress={() => navigation.goBack()}>
+            <Feather name={"arrow-left"} size={26} color="black" />
+          </Pressable>
+          :
+          null
+      }
+
       <View style={styles.titleContainer}>{getTitle()}</View>
-      <Pressable style={styles.cart}><Feather name="user" size={26} color="black" /></Pressable>
+      {
+        route.name === "Perfil"
+          ?
+          null
+          :
+          <Pressable style={styles.cart} onPress={() => navigation.navigate("ProfileStack", { screen: "Perfil" })}><Feather name="user" size={26} color="black" /></Pressable>
+      }
     </View>
   )
 }

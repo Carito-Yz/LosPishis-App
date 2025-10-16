@@ -7,7 +7,7 @@ import * as Yup from "yup";
 
 const textInputWidth = Dimensions.get('window').width * 0.7
 
-const LoginScreen = ({ navigation }) => {
+const SignupSreen = ({ navigation }) => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -94,7 +94,7 @@ const LoginScreen = ({ navigation }) => {
     )
 }
 
-export default LoginScreen
+export default SignupSreen
 
 const styles = StyleSheet.create({
     container: {
