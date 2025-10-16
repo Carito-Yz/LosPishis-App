@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { setUserEmail, setLocalId } from '../../store/slices/userSlice'
 import { saveSession, clearSession } from '../../db'
+import { Popup } from '@sekizlipenguen/react-native-popup-confirm-toast'
 
 const textInputWidth = Dimensions.get('window').width * 0.7
 
@@ -19,7 +20,14 @@ const LoginScreen = ({ navigation }) => {
         try {
             const result = await triggerLogin({ email, password }).unwrap();
         } catch (err) {
-            console.log("Error login:", err);
+            Popup.show({
+                iconEnabled: false,
+                textBody: "Ha ocurrido un error, vuelva a intentarlo",
+                buttonText: 'Cerrar',
+                callback: () => {
+                    Popup.hide();
+                }
+            })
         }
     };
 
@@ -40,7 +48,14 @@ const LoginScreen = ({ navigation }) => {
                     dispatch(setUserEmail(email))
                     dispatch(setLocalId(localId))
                 } catch (error) {
-                    console.log("Error al guardar sesion:", error)
+                    Popup.show({
+                        iconEnabled: false,
+                        textBody: "Ha ocurrido un error, vuelva a intentarlo",
+                        buttonText: 'Cerrar',
+                        callback: () => {
+                            Popup.hide();
+                        }
+                    })
                 }
             }
         }

@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native'
 
-const FlatCard = ({ children, color }) => {
+const FlatCard = ({ children, color, style }) => {
   return (
-    <View style={[styles.container, { backgroundColor: color }]}>
+    <View style={[styles.container, style, { backgroundColor: color }]}>
       {children}
     </View>
   )

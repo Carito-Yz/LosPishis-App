@@ -44,9 +44,11 @@ const Header = ({ navigation, route }) => {
       {
         navigation.canGoBack()
           ?
-          <Pressable style={styles.menu} onPress={() => navigation.goBack()}>
-            <Feather name={"arrow-left"} size={26} color="black" />
-          </Pressable>
+          <View style={styles.leftIconContainer}>
+            <Pressable onPress={() => navigation.goBack()}>
+              <Feather name={"arrow-left"} size={26} color="black" />
+            </Pressable>
+          </View>
           :
           null
       }
@@ -57,7 +59,7 @@ const Header = ({ navigation, route }) => {
           ?
           null
           :
-          <Pressable style={styles.cart} onPress={() => navigation.navigate("ProfileStack", { screen: "Perfil" })}><Feather name="user" size={26} color="black" /></Pressable>
+          <Pressable style={styles.user} onPress={() => navigation.navigate("ProfileStack", { screen: "Perfil" })}><Feather name="user" size={26} color="black" /></Pressable>
       }
     </View>
   )
@@ -71,28 +73,30 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-around",
-    paddingTop: 30
+    justifyContent: "space-between",
+    paddingTop: 30,
+    paddingHorizontal: 15,
+  },
+  leftIconContainer: {
+    width: 40,
+    alignItems: 'flex-start',
   },
   titleContainer: {
-    justifyContent: "center"
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  rightIconContainer: {
+    width: 40,
+    alignItems: 'flex-end',
   },
   title: {
     fontSize: 35,
     fontFamily: "Juice-ITC-Regular",
-    textAlign: "center"
-  },
-  menu: {
-    width: '20%',
-  },
-  cart: {
-    width: '20%',
-    flexDirection: "row",
-    justifyContent: "flex-end"
+    color: colors.bordo
   },
   subTitle: {
     fontFamily: "Product-Sans-Italic",
     fontSize: 16,
-    textAlign: "center"
   }
 })

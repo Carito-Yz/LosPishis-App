@@ -11,7 +11,7 @@ const CategoriesScreen = ({ navigation }) => {
 
   const [categorySelectedToggle, setCategorySelectedToggle] = useState(null)
 
-  const { data: categories, isLoading, error } = useGetCategoriesQuery()
+  const { data: categories } = useGetCategoriesQuery()
 
   const dispatch = useDispatch()
 
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     marginBottom: 30
   },
   categories: {
-    height: "90%",
+    flex: 1
   },
   title: {
     color: colors.white,
@@ -87,25 +87,25 @@ const styles = StyleSheet.create({
     fontSize: 25
   },
   categoriesDecoration: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
+    width: 120,
+    height: 120,
+    borderRadius: 60,
     position: "absolute",
-    right: 30
+    right: 20
   },
   categoriesSubDecoration: {
-    width: 65,
-    height: 65,
-    borderRadius: 32.5,
+    width: 75,
+    height: 75,
+    borderRadius: 37.5,
     position: "absolute",
-    right: 48
+    right: 44
   },
   categoriesImage: {
     position: "absolute",
     right: 20,
-    bottom: 0,
-    width: 110,
-    height: 110,
+    bottom: 5,
+    width: 120,
+    height: 120,
   },
   subCategoryContainer: {
     alignItems: "center"

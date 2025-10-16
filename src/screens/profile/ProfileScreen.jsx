@@ -38,7 +38,14 @@ const ProfileScreen = () => {
         try {
             await clearSession();
         } catch (error) {
-            console.log("Hubo un error al cerrar sesión:", error);
+            Popup.show({
+                iconEnabled: false,
+                textBody: "Ha ocurrido un error, vuelva a intentarlo",
+                buttonText: 'Cerrar',
+                callback: () => {
+                    Popup.hide();
+                }
+            })
         }
         dispatch(clearUser());
     }

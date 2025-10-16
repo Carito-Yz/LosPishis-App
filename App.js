@@ -4,10 +4,10 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect} from 'react';
 import { ActivityIndicator } from 'react-native';
-import BottomTabsNavigator from "./src/navigation/BottomTabsNavigator.jsx"
 import { PishisStore} from './src/store';
 import { Provider } from 'react-redux';
 import MainNavigator from './src/navigation/MainNavigator.jsx';
+import { Root } from '@sekizlipenguen/react-native-popup-confirm-toast';
 
 export default function App() {
   const [loaded] = useFonts({
@@ -37,9 +37,11 @@ export default function App() {
   }
 
   return (
-    <Provider store={PishisStore}>
+    <Root>
+      <Provider store={PishisStore}>
         <MainNavigator />
         <StatusBar style="auto" />
-    </Provider>
+      </Provider>
+    </Root>
   );
 }

@@ -39,7 +39,14 @@ export default function MainNavigator() {
                     dispatch(setLocalId(session.localId))
                 }
             } catch (error) {
-                console.log("ERROR IN SESSION RECOVERY:", error)
+                Popup.show({
+                    iconEnabled: false,
+                    textBody: "Ha ocurrido un error, vuelva a intentarlo",
+                    buttonText: 'Cerrar',
+                    callback: () => {
+                        Popup.hide();
+                    }
+                })
             } finally {
                 setCheckingSession(false)
             }
