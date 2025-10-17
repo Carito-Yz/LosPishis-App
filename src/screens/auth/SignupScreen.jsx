@@ -1,9 +1,12 @@
-import { StyleSheet, Text, View, TextInput, Pressable, Dimensions } from 'react-native'
+import { StyleSheet, Text, View, TextInput, Pressable, Dimensions, Switch } from 'react-native'
 import { useSignUpMutation } from '../../store/services/AuthApi'
 import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { setUserEmail } from '../../store/slices/userSlice'
 import * as Yup from "yup";
+import { clearSession, saveSession } from '../../db'
+import { setLocalId } from '../../store/slices/userSlice'
+import { Popup } from '@sekizlipenguen/react-native-popup-confirm-toast'
 
 const textInputWidth = Dimensions.get('window').width * 0.7
 
@@ -13,6 +16,7 @@ const SignupSreen = ({ navigation }) => {
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
     const [errors, setErrors] = useState({})
+    const [persistSession, setPersistSession] = useState(false)
 
     const signupSchema = Yup.object().shape({
         email: Yup.string()
@@ -53,10 +57,33 @@ const SignupSreen = ({ navigation }) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if (result.status === "fulfilled") {
-            dispatch(setUserEmail(email))
+        const saveSignupSession = async () => {
+            if (result.status === "fulfilled") {
+                try {
+                    const { localId, email } = result.data;
+                    if (persistSession) {
+                        await saveSession(localId, email);
+                    } else {
+                        await clearSession();
+                    }
+
+                    dispatch(setUserEmail(email));
+                    dispatch(setLocalId(localId));
+                } catch (error) {
+                    Popup.show({
+                        iconEnabled: false,
+                        textBody: "Ha ocurrido un error, vuelva a intentarlo",
+                        buttonText: 'Cerrar',
+                        callback: () => {
+                            Popup.hide();
+                        }
+                    })
+                }
+            }
         }
-    }, [result])
+
+        saveSignupSession();
+    }, [result]);
 
     return (
         <View style={styles.container}>
@@ -68,7 +95,7 @@ const SignupSreen = ({ navigation }) => {
                     placeholder="Email"
                     style={styles.textInput}
                 />
-                {errors.email && <Text style={styles.error}>{errors.email}</Text>}
+                {errors.email ? <Text style={styles.error}>{errors.email}</Text> : null}
 
                 <TextInput
                     onChangeText={(text) => setPassword(text)}
@@ -76,7 +103,7 @@ const SignupSreen = ({ navigation }) => {
                     style={styles.textInput}
                     secureTextEntry
                 />
-                {errors.password && <Text style={styles.error}>{errors.password}</Text>}
+                {errors.password ? <Text style={styles.error}>{errors.password}</Text> : null}
 
                 <TextInput
                     onChangeText={(text) => setConfirmPassword(text)}
@@ -84,8 +111,25 @@ const SignupSreen = ({ navigation }) => {
                     style={styles.textInput}
                     secureTextEntry
                 />
-                {errors.confirmPassword && <Text style={styles.error}>{errors.confirmPassword}</Text>}
+                {errors.confirmPassword ? <Text style={styles.error}>{errors.confirmPassword}</Text> : null}
             </View>
+
+            <Text style={styles.whiteText}>¿Ya tienes una cuenta?</Text>
+            <Pressable onPress={() => navigation.navigate('Signup')}>
+                <Text style={
+                    {
+                        ...styles.whiteText,
+                        ...styles.underLineText
+                    }
+                }>
+                    Ingresa
+                </Text>
+            </Pressable>
+
+            <Switch
+                onValueChange={() => setPersistSession(!persistSession)}
+                value={persistSession}
+                trackColor={{ false: '#767577', true: '#81b0ff' }} />
 
             <Pressable style={styles.btn} onPress={onSubmit}>
                 <Text style={styles.btnText}>Registrarse</Text>
