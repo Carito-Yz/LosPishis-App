@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import { clearSession, saveSession } from '../../db'
 import { setLocalId } from '../../store/slices/userSlice'
 import { Popup } from '@sekizlipenguen/react-native-popup-confirm-toast'
+import { colors } from '../../theme/colors';
 
 const textInputWidth = Dimensions.get('window').width * 0.7
 
@@ -87,9 +88,11 @@ const SignupSreen = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Los Pishis</Text>
-            <Text style={styles.subTitle}>Registrarse</Text>
-            <View style={styles.inputContainer}>
+            <View style={styles.titleContainer}>
+                <Text style={styles.title}>Registrar</Text>
+            </View>
+
+            <View style={styles.formContainer}>
                 <TextInput
                     onChangeText={(text) => setEmail(text)}
                     placeholder="Email"
@@ -99,7 +102,7 @@ const SignupSreen = ({ navigation }) => {
 
                 <TextInput
                     onChangeText={(text) => setPassword(text)}
-                    placeholder='Password'
+                    placeholder='Contraseña'
                     style={styles.textInput}
                     secureTextEntry
                 />
@@ -107,33 +110,34 @@ const SignupSreen = ({ navigation }) => {
 
                 <TextInput
                     onChangeText={(text) => setConfirmPassword(text)}
-                    placeholder='Confirm Password'
+                    placeholder='Confirmar Contraseña'
                     style={styles.textInput}
                     secureTextEntry
                 />
                 {errors.confirmPassword ? <Text style={styles.error}>{errors.confirmPassword}</Text> : null}
+
+                <View style={styles.persistContainer}>
+                    <Text style={styles.persistText}>Recordar Sesión</Text>
+                    <Switch
+                        onValueChange={() => setPersistSession(!persistSession)}
+                        value={persistSession}
+                        trackColor={{ false: colors.grisClaro, true: colors.bordo }}
+                        thumbColor={colors.white} />
+                </View>
+
+                <View style={styles.buttonContainer}>
+                    <Pressable style={styles.btn} onPress={onSubmit}><Text style={styles.btnText}>REGISTRAR</Text></Pressable>
+                </View>
             </View>
 
-            <Text style={styles.whiteText}>¿Ya tienes una cuenta?</Text>
-            <Pressable onPress={() => navigation.navigate('Signup')}>
-                <Text style={
-                    {
-                        ...styles.whiteText,
-                        ...styles.underLineText
-                    }
-                }>
-                    Ingresa
-                </Text>
-            </Pressable>
-
-            <Switch
-                onValueChange={() => setPersistSession(!persistSession)}
-                value={persistSession}
-                trackColor={{ false: '#767577', true: '#81b0ff' }} />
-
-            <Pressable style={styles.btn} onPress={onSubmit}>
-                <Text style={styles.btnText}>Registrarse</Text>
-            </Pressable>
+            <View style={styles.footTextContainer}>
+                <Text style={styles.footText}>¿Ya tienes una cuenta?</Text>
+                <Pressable onPress={() => navigation.goBack()}>
+                    <Text style={styles.footPressableText}>
+                        Ingresar
+                    </Text>
+                </Pressable>
+            </View>
         </View>
     )
 }
@@ -142,58 +146,89 @@ export default SignupSreen
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        height: "100%",
+        width: "100%",
+        justifyContent: "space-evenly",
+        alignItems: "center"
+    },
+    titleContainer: {
+        height: "20%",
+        justifyContent: "flex-end",
+        width: "80%",
+        alignItems: "flex-start",
+        paddingLeft: 16
     },
     title: {
-        fontFamily: "PressStart2P",
-        fontSize: 24
+        fontFamily: "Product-Sans-Bold",
+        fontSize: 40
     },
-    subTitle: {
-        fontFamily: "Montserrat",
-        fontSize: 18,
-        fontWeight: '700',
-        letterSpacing: 3
-    },
-    inputContainer: {
-        gap: 16,
-        margin: 16,
-        marginTop: 48,
-        alignItems: 'center',
-
+    formContainer: {
+        height: "40%",
+        width: "80%"
     },
     textInput: {
         padding: 8,
         paddingLeft: 16,
         borderRadius: 16,
-        width: textInputWidth,
-    },
-    footTextContainer: {
-        flexDirection: 'row',
-        gap: 8,
-    },
-    whiteText: {
-    },
-    underLineText: {
-        textDecorationLine: 'underline',
-    },
-    strongText: {
-        fontWeight: '900',
+        width: "100%",
+        marginTop: 10,
+        marginBottom: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: "black",
+        fontFamily: "Product-Sans-Regular",
         fontSize: 16
     },
+    footTextContainer: {
+        width: "80%",
+        flexDirection: "row",
+        justifyContent: "center",
+        height: "10%"
+    },
+    footText: {
+        marginEnd: 10,
+        fontFamily: "Product-Sans-Regular",
+        fontSize: 16
+    },
+    footPressableText: {
+        textDecorationLine: "underline",
+        fontFamily: "Product-Sans-Regular",
+        fontSize: 16
+    },
+    persistContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "flex-end",
+        marginTop: 10
+    },
+    persistText: {
+        marginEnd: 10,
+        fontFamily: "Product-Sans-Regular",
+        fontSize: 14
+    },
+    buttonContainer: {
+        width: "100%",
+        alignItems: "center",
+        marginTop: 40,
+    },
     btn: {
-        padding: 16,
-        paddingHorizontal: 32,
-        borderRadius: 16,
-        marginTop: 32
+        backgroundColor: "black",
+        height: 60,
+        width: 150,
+        borderRadius: 30,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: colors.black
     },
     btnText: {
-        fontSize: 16,
-        fontWeight: '700'
+        fontSize: 20,
+        color: "white",
+        fontFamily: "Product-Sans-Regular",
     },
     error: {
-        padding: 16,
+        paddingStart: 16,
+        paddingTop: 5,
+        paddingBottom: 5,
         borderRadius: 8,
+        color: colors.bordo
     }
 })
